@@ -45,11 +45,11 @@ The aggregator should contain articles that are relevant to the Valkey Community
 / Ecosystem.
 
 - If your blog contains a mix of Valkey and non-Valkey content, please submit a
-category or tag feed instead of a default feed.
+category or a tag feed instead of the default feed.
 
-- If it is not possible to submit a category or tag feed,
+- If it is not possible to submit a category or a tag feed,
 [filtering your feed](https://github.com/jfg956/valkey-planet/blob/main/feed_filtering.md)
-on the aggregator side might be possible.
+is possible.
 
 - If the recent entries of a submitted feed contain a small amount of relevant
 content, it might be considered for
@@ -96,8 +96,8 @@ file.
 
 <!-- 6789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 -->
 
-If you have a good reason for not creating an issue, you can send an email at
-valkey-planet AT oursqlcommunity DOT org.  In your email, please explain why you
+If you have a good reason for not creating an issue or a PR, you can send an email
+to valkey-planet AT oursqlcommunity DOT org.  In your email, please explain why you
 did not create an issue.  Do not send an email for anonymity reasons, as your name
 will be mentioned in a corresponding issue or pull request (normally, addition
 and removal of feeds are done openly, but there might be exceptions for abuses

@@ -8,7 +8,7 @@ This repository contains the configuration required to generate the contents of
 
 The current version of this file can be found in (1).
 
-(1): https://github.com/jfg956/valkey-planet/blob/master/README.md
+(1): https://github.com/jfg956/valkey-planet/blob/main/README.md
 
 
 <!-- 6789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 -->
