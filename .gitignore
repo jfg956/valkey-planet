@@ -1,0 +1,4 @@
+*.swp
+planet.db
+html/
+log/
