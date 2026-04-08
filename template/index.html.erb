@@ -23,6 +23,8 @@
 
 <div id='navwrap'>
 <div id='nav'>
+  <p><center><a href="https://jfg-mysql.blogspot.com/2026/04/thanks-aws-open-source.html"><img src="https://d0.awsstatic.com/logos/powered-by-aws.png" alt="Powered by AWS"></a></center></p>
+
   <p>Last Update:</p>
   <p class='small'><%= site.updated.to_datetime.rfc3339 if site.updated %></p>
 
@@ -37,7 +39,7 @@
     <li><%= link_to "How to add / remove a feed", "https://github.com/jfg956/valkey-planet/blob/main/aggregation_and_content_policy.md#adding--removing-a-feed" %></li>
     <li>Maintained by Jean-François Gagné <%= link_to '', "http://twitter.com/@jfg956", :class => "icon-twitter" %></li>
     <li>Sponsored by <%= link_to 'Aiven', "http://aiven.io/" %></li>
-    <li>Helped by ...(TBC)</li>
+    <li>Helped by <%= link_to "many people", "https://github.com/jfg956/valkey-planet/blob/master/credit_and_history.md" %></li>
     <li>Built with the <%= link_to "Pluto Feed Reader", "https://github.com/feedreader" %></li>
     <li><%= link_to "Font Awesome", "http://fontawesome.io" %> by Dave Gandy</li>
   </ul>
