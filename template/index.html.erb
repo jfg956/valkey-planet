@@ -13,7 +13,7 @@
     -- <link rel="alternate" type="application/rss+xml" title="RSS feed" href="rss20.xml" /> -->
   <link rel="shortcut icon" href="/favicon.ico" />
 
-  <%= stylesheet_link_tag 'css/font-awesome' %>
+  <%= stylesheet_link_tag 'css/fontawesome-all.css' %>
   <%= stylesheet_link_tag 'css/blank' %>
 
   <script src='js/jquery-2.0.3.min.js'></script>
@@ -23,25 +23,37 @@
 
 <div id='navwrap'>
 <div id='nav'>
+  
   <p><center><a href="https://github.com/jfg956/valkey-planet/blob/main/credit_and_history.md#aws-open-source-credits"><img src="https://d0.awsstatic.com/logos/powered-by-aws.png" alt="Powered by AWS"></a></center></p>
+
+  <p><center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="planetMySQLComT" data-color="#FFDD00" data-emoji=""  data-font="Arial" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center></p>
 
   <p>Last Update:</p>
   <p class='small'><%= site.updated.to_datetime.rfc3339 if site.updated %></p>
 
-  <p><i class='icon-rss-sign'></i> <%= link_to "Atom feed", "atom.xml" %></p>
-  <!-- <p><i class='icon-rss-sign'></i> <%= link_to "RSS 2.0 feed", "rss20.xml" %></p> -->
+  <p>
+    <i class="fa-solid fa-square-rss"></i> <%= link_to "Atom feed", "atom.xml" %><br>
+    <!-- <i class='icon-rss-sign'></i> <%= link_to "RSS 2.0 feed", "rss20.xml" %><br> -->
+    <!-- TODO: create a Parrot Feed for Planet Valkey -->
+    <i class="fab fa-mastodon"></i> <%= link_to "Parrot feed (Mastodon)", "https://fosstodon.org/@valkey-demo.oursqlcommunity.org@rss-parrot.net" %>
+  </p>
 
   <p>Meta:</p>
   <ul class='metas small'>
-    <li>Support Planet by following us: <%= link_to '', "https://x.com/PlanetValkeyCmT", :class => "icon-twitter" %></li>
+    <li>Support Planet by following us:
+          <%= link_to '<i class="fa-brands fa-mastodon"></i>',  "https://fosstodon.org/@Planet_Valkey" %>
+          <%= link_to '<i class="fa-brands fa-bluesky"></i>',   "https://bsky.app/profile/Planet-Valkey.fosstodon.org.ap.brid.gy" %>
+          <%= link_to '<i class="fa-brands fa-x-twitter"></i>', "https://x.com/Planet_Valkey" %>
+          </li>
+    <li>Support Planet by staring us: <%= link_to '<i class="fa-brands fa-github"></i>', "https://github.com/jfg956/valkey-planet" %></li>
+    <li>Financially support us on <%= link_to "Buy me a coffee", "https://buymeacoffee.com/planetmysqlcomt" %></li>
     <li><%= link_to "Abuse procedure", "https://github.com/jfg956/valkey-planet/blob/main/aggregation_and_content_policy.md#abuse-procedure" %></li>
     <li><%= link_to "Aggregation and content policy", "https://github.com/jfg956/valkey-planet/blob/main/aggregation_and_content_policy.md" %></li>
     <li><%= link_to "How to add / remove a feed", "https://github.com/jfg956/valkey-planet/blob/main/aggregation_and_content_policy.md#adding--removing-a-feed" %></li>
-    <li>Maintained by <%= link_to "Jean-François Gagné", "https://linktr.ee/jfg.mysql" %></li>
-    <li>Sponsored by <%= link_to 'Aiven', "https://github.com/jfg956/valkey-planet/blob/master/credit_and_history.md" %></li>
+    <li>Created by <%= link_to 'Jean-François Gagné', "https://linktr.ee/jfg.mysql" %></li>
     <li>Helped by <%= link_to "many people", "https://github.com/jfg956/valkey-planet/blob/master/credit_and_history.md" %></li>
     <li>Built with the <%= link_to "Pluto Feed Reader", "https://github.com/feedreader" %></li>
-    <li><%= link_to "Font Awesome", "http://fontawesome.io" %> by Dave Gandy</li>
+    <li>Using <%= link_to "Font Awesome", "http://fontawesome.io" %> v7.3.1</li>
   </ul>
 
   <p>Planetarium:</p>
@@ -57,15 +69,26 @@
   <p>Subscriptions:</p>
   <ul class='subscriptions small' >
     <li><hr class='item-separator'></li>
-    <!-- TODO: add separator between type of feeds (agg, aso, com, perso, news, ...). -->
+
+<% prefix_old = "" %>
 <% site.feeds.each do |feed| %>
+    <% prefix_new = feed.key[0, feed.key.index("_")] %>
+    <%= "<li><hr class='item-separator'></li>" if prefix_old != prefix_new %>
+    <% prefix_old = prefix_new %>
     <li>
-      <%= link_to '',  feed.feed_url, :class => "icon-rss-sign" %>
+      <%= link_to '<i class="fa-solid fa-square-rss"></i>',  feed.feed_url %>
       <%= link_to feed.title, feed.url %>
-      <%= link_to '', "https://twitter.com/#{feed.twitter}", :class => "icon-twitter" if feed.twitter %>
-      <%= link_to '', "https://github.com/oursqlcommunity-org/planet/blob/master/feed_filtering.md", :class => "icon-filter" if feed.key.end_with?("_filtered") %>
+      <%= link_to '<small>(<i class="fa-solid fa-filter"></i>)</small>', "https://github.com/jfg956/valkey-planet/blob/main/feed_filtering.md" if feed.key.end_with?("_filtered") %>
+      <%= ':' if feed.rubygems || feed.meetup || feed.avatar || feed.location || feed.twitter %>
+      <%= link_to '<i class="fa-brands fa-mastodon"></i>', "#{feed.rubygems}" if feed.rubygems %>
+      <%= link_to '<i class="fa-brands fa-bluesky"></i>', "#{feed.meetup}" if feed.meetup %>
+      <%= link_to '<i class="fa-brands fa-linkedin-in"></i>', "#{feed.avatar}" if feed.avatar %>
+      <%= link_to '<i class="fa-solid fa-link"></i>', "#{feed.location}" if feed.location %>
+      <%= link_to '<i class="fa-brands fa-x-twitter"></i>', "https://x.com/#{feed.twitter}" if feed.twitter %>
     </li>
 <% end %>
+
+    <li><hr class='item-separator'></li>
     <li><hr class='item-separator'></li>
    </ul>
 </div>
@@ -81,7 +104,7 @@
 <h1 style='margin: 0px 0px 0px 0px'><%= site.title %></h1>
 <h3 style='margin: 0px 0px 0px 0px'>A blog / news aggregator for the <%= link_to "Valkey", "https://valkey.io/" %> Community / Ecosystem</h3>
 
-<p>This is a demo of what a Blog / News Aggregator for the Valkey Community / Ecosystem would look like.</p>
+<p>(work in progress, please do not advertise too widely)</p>
 
 <div id="articles">
 <%
@@ -100,8 +123,8 @@
   <article class='item'>
 
     <h3 class='item-title'>
-      <i class='icon-caret-down item-collapse item-close item-opened'></i>
-      <i class='icon-caret-right item-expand item-open item-closed'></i>
+      <i class='fa-solid fa-caret-down  item-collapse item-close item-opened'></i>
+      <i class='fa-solid fa-caret-right item-expand  item-open   item-closed'></i>
       <%= link_to item.title, item.url %>
       <sup><small>(from <%= link_to item.feed.title, item.feed.url %>)</small></sup>
     </h3>
