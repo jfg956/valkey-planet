@@ -17,10 +17,15 @@
   <lastBuildDate><%= site.updated.rfc822 if site.updated %></lastBuildDate>
   <generator><%= Pluto.generator %> - http://feedreader.github.io/</generator>
   <atom:link href="<%= site.url %>atom.xml" rel="self" type="application/atom+xml" />
-
 <%
    items = site.items.latest.limit(100)
    ItemCursor.new( items ).each do |item, new_date, new_feed|
+      title = item.feed.title
+      if title.start_with?("_FI_ ")
+         title = title[5, title.length-5]
+      elsif title.start_with?("_NF_ ")
+         title = title[5, title.length-5]
+      end
 %>
 <item>
   <title><%= CGI.escapeHTML(item.title) %></title>
@@ -32,7 +37,7 @@
   <% end %> [...]</description>
   <guid><%= CGI.escapeHTML(item.url) %></guid>
   <pubDate><%= item.updated.rfc822 %></pubDate>
-  <dc:creator><%= CGI.escapeHTML(item.feed.title) %></dc:creator>
+  <dc:creator><%= CGI.escapeHTML(title) %></dc:creator>
 </item>
 <% end %>
 
