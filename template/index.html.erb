@@ -70,15 +70,29 @@
   <ul class='subscriptions small' >
     <li><hr class='item-separator'></li>
 
-<% prefix_old = "" %>
-<% site.feeds.each do |feed| %>
-    <% prefix_new = feed.key[0, feed.key.index("_")] %>
-    <%= "<li><hr class='item-separator'></li>" if prefix_old != prefix_new %>
-    <% prefix_old = prefix_new %>
+<%
+   prefix_old = ""
+   site.feeds.each do |feed|
+
+      prefix_new = feed.key[0, feed.key.index("_")]
+      separator = prefix_old != prefix_new
+      prefix_old = prefix_new
+
+      title = feed.title
+      filtered = feed.key.end_with?("_filtered")
+      if title.start_with?("_FI_ ")
+         title = title[5, title.length-5]
+         filtered = true
+      elsif title.start_with?("_NF_ ")
+         title = title[5, title.length-5]
+         filtered = false
+      end
+%>
+    <%= "<li><hr class='item-separator'></li>" if separator %>
     <li>
-      <%= link_to '<i class="fa-solid fa-square-rss"></i>',  feed.feed_url %>
-      <%= link_to feed.title, feed.url %>
-      <%= link_to '<small>(<i class="fa-solid fa-filter"></i>)</small>', "https://github.com/jfg956/valkey-planet/blob/main/feed_filtering.md" if feed.key.end_with?("_filtered") %>
+      <%= link_to '<i class="fa-solid fa-square-rss"></i>', feed.feed_url %>
+      <%= link_to title, feed.url %>
+      <%= link_to '<small>(<i class="fa-solid fa-filter"></i>)</small>', "https://github.com/jfg956/valkey-planet/blob/main/feed_filtering.md" if filtered %>
       <%= ':' if feed.rubygems || feed.meetup || feed.avatar || feed.location || feed.twitter %>
       <%= link_to '<i class="fa-brands fa-mastodon"></i>', "#{feed.rubygems}" if feed.rubygems %>
       <%= link_to '<i class="fa-brands fa-bluesky"></i>', "#{feed.meetup}" if feed.meetup %>
@@ -111,7 +125,14 @@
    items = site.items.latest.limit(100)
    ItemCursor.new( items ).each do |item, new_date, new_feed|
 
-   break if item.published < (Date.today - 120)
+      break if item.published < (Date.today - 120)
+
+      title = item.feed.title
+      if title.start_with?("_FI_ ")
+         title = title[5, title.length-5]
+      elsif title.start_with?("_NF_ ")
+         title = title[5, title.length-5]
+      end
 %>
 
 <% if new_date %>
@@ -126,7 +147,7 @@
       <i class='fa-solid fa-caret-down  item-collapse item-close item-opened'></i>
       <i class='fa-solid fa-caret-right item-expand  item-open   item-closed'></i>
       <%= link_to item.title, item.url %>
-      <sup><small>(from <%= link_to item.feed.title, item.feed.url %>)</small></sup>
+      <sup><small>(from <%= link_to title, item.feed.url %>)</small></sup>
     </h3>
 
     <div class='item-body'>
