@@ -11,10 +11,16 @@ the Valkey Aggregator was live.
 ## Sysadmin help
 
 Maintaining a blog aggregator is not a lot of work, but it should not be on a single
-person.  In addition to Jean-François Gagné, the following people have commit access to
+person. In addition to Jean-François Gagné, the following people have commit access to
 the repository and are able to make change to the website:
 
 * [Bogdan Petre](https://github.com/bogdanp05)
+
+## Aiven Sponsorship
+
+Aiven offers monetary compensation for all employees who spend some of their free time working
+on open-source projects. Bogdan is a beneficiary of this program through his contributions
+to the Planet for the Valkey Community.
 
 ## AWS Open Source Credits
 
