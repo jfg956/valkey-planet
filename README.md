@@ -1,6 +1,11 @@
 
 <!-- 6789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 -->
 
+(this repo is in the process of being moved)
+(source: https://github.com/jfg956/valkey-planet/)
+(destination: https://github.com/valkey-io/)
+(major edits will follow the move)
+
 # Planet for the Valkey Community
 
 This repository contains the configuration required to generate the contents of
